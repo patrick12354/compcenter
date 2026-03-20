@@ -16,6 +16,11 @@ export const metadata = {
   title: "IRIS Competition Center",
   description:
     "Radar kompetisi IRIS untuk memantau event, deadline, guidebook, dan progres pendaftaran dari satu dashboard.",
+  icons: {
+    icon: "https://res.cloudinary.com/dg4jf2sag/image/upload/v1772438965/logo_iris_gftpz1.png",
+    shortcut: "https://res.cloudinary.com/dg4jf2sag/image/upload/v1772438965/logo_iris_gftpz1.png",
+    apple: "https://res.cloudinary.com/dg4jf2sag/image/upload/v1772438965/logo_iris_gftpz1.png"
+  },
   openGraph: {
     title: "IRIS Competition Center",
     description:
