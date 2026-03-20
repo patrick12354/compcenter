@@ -48,12 +48,13 @@ export default function CompetitionCard({ competition, saved, onToggleSaved, onO
         </div>
 
         <div className="card-footer">
+          <span className="card-footer-label">Tautan tersedia</span>
           <div className="card-tags">
             {competition.registrationLink ? <span>Registrasi</span> : null}
             {competition.guidebookLink ? <span>Guidebook</span> : null}
             {competition.instagramLink ? <span>Instagram</span> : null}
+            {competition.linktree ? <span>Linktree</span> : null}
           </div>
-          <span className="secondary-button">Buka detail</span>
         </div>
       </div>
     </article>
