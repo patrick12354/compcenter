@@ -139,7 +139,12 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
                 <span>Direktori kompetisi untuk menemukan event yang relevan lebih cepat.</span>
               </div>
             </div>
-            <div className="hero-badge">Data publik tersinkron dari sheet utama</div>
+            <div className="nav-actions">
+              <div className="hero-badge">Data publik tersinkron dari sheet utama</div>
+              <a href="/admin/login" className="secondary-button nav-admin-link">
+                Admin
+              </a>
+            </div>
           </div>
 
           <div className="hero-copy">

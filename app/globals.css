@@ -417,6 +417,16 @@ img {
   gap: 16px;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-admin-link {
+  min-height: 42px;
+}
+
 .brand-lockup {
   display: flex;
   align-items: center;
@@ -1087,6 +1097,11 @@ img {
   .section-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .nav-actions {
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .brand-lockup {
