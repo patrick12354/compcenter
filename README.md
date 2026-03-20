@@ -7,6 +7,11 @@ Website katalog kompetisi untuk IRIS dengan dua area utama:
 
 Project ini dibangun dengan `Next.js` dan disiapkan untuk deploy ke Vercel.
 
+## Live URL
+
+- Public site: https://compcenter.vercel.app/
+- Admin login: https://compcenter.vercel.app/admin/login
+
 ## Fitur
 
 - Homepage katalog lomba dengan search, filter, sorting, bookmark lokal, dan modal detail
