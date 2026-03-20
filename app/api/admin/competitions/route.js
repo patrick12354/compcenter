@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/admin-auth";
 import {
@@ -43,6 +44,7 @@ export async function POST(request) {
     }
 
     const result = await appendCompetitionToSheet(payload);
+    revalidateTag("competitions");
 
     return NextResponse.json({
       success: true,

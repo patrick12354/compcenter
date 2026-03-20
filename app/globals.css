@@ -110,6 +110,18 @@ img {
   margin-bottom: 20px;
 }
 
+.admin-topbar-actions,
+.admin-auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-auth-actions {
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
 .admin-logo {
   width: 58px;
   height: 58px;
@@ -1064,6 +1076,11 @@ img {
 
   .admin-topbar {
     flex-direction: column;
+  }
+
+  .admin-topbar-actions,
+  .admin-auth-actions {
+    flex-wrap: wrap;
   }
 
   .admin-grid,

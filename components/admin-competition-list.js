@@ -9,8 +9,13 @@ export default function AdminCompetitionList({ competitions }) {
   const [isPending, startTransition] = useTransition();
   const [deletingRow, setDeletingRow] = useState(null);
 
-  async function handleDelete(rowIndex, name) {
-    const confirmed = window.confirm(`Hapus row untuk "${name}" dari spreadsheet?`);
+  async function handleDelete(rowIndex, name, posterLink) {
+    const cloudinaryNote = posterLink?.includes("res.cloudinary.com")
+      ? "\nPoster Cloudinary yang terhubung juga akan dihapus."
+      : "";
+    const confirmed = window.confirm(
+      `Hapus row untuk "${name}" dari spreadsheet?${cloudinaryNote}`
+    );
     if (!confirmed) return;
 
     setDeletingRow(rowIndex);
@@ -22,7 +27,7 @@ export default function AdminCompetitionList({ competitions }) {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ rowIndex })
+        body: JSON.stringify({ rowIndex, posterLink })
       });
 
       const data = await response.json();
@@ -84,7 +89,7 @@ export default function AdminCompetitionList({ competitions }) {
                   <button
                     type="button"
                     className="danger-button"
-                    onClick={() => handleDelete(competition.rowIndex, competition.name)}
+                    onClick={() => handleDelete(competition.rowIndex, competition.name, competition.posterLink)}
                     disabled={isPending || deletingRow === competition.rowIndex}
                   >
                     {deletingRow === competition.rowIndex ? "Menghapus..." : "Hapus"}

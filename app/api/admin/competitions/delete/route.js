@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/admin-auth";
 import { deleteCompetitionRow } from "@/lib/admin-services";
@@ -12,12 +13,14 @@ export async function POST(request) {
   try {
     const body = await request.json();
     const rowIndex = Number(body.rowIndex);
+    const posterLink = String(body.posterLink || "");
 
     if (!Number.isInteger(rowIndex) || rowIndex < 2) {
       return NextResponse.json({ error: "Row index tidak valid." }, { status: 400 });
     }
 
-    await deleteCompetitionRow(rowIndex);
+    await deleteCompetitionRow(rowIndex, posterLink);
+    revalidateTag("competitions");
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(

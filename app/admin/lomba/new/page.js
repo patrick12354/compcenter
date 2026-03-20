@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AdminCompetitionForm from "@/components/admin-competition-form";
 import AdminCompetitionList from "@/components/admin-competition-list";
 import { requireAdminSession } from "@/lib/admin-auth";
@@ -26,11 +27,16 @@ export default async function NewCompetitionPage() {
               Form ini akan menulis row baru ke sheet utama. Poster bisa diisi lewat upload Cloudinary atau link manual.
             </p>
           </div>
-          <form action="/api/admin/logout" method="post">
-            <button type="submit" className="secondary-button">
-              Logout
-            </button>
-          </form>
+          <div className="admin-topbar-actions">
+            <Link href="/" className="secondary-button">
+              Back to Home
+            </Link>
+            <form action="/api/admin/logout" method="post">
+              <button type="submit" className="secondary-button">
+                Logout
+              </button>
+            </form>
+          </div>
         </div>
 
         <AdminCompetitionForm />

@@ -9,8 +9,7 @@ Project ini dibangun dengan `Next.js` dan disiapkan untuk deploy ke Vercel.
 
 ## Live URL
 
-- Public site: https://compcenter.vercel.app/
-- Admin login: https://compcenter.vercel.app/admin/login
+- Live site: https://bit.ly/iriscompcenter
 
 ## Fitur
 

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import AdminLoginForm from "@/components/admin-login-form";
 import { getAdminSession } from "@/lib/admin-auth";
@@ -23,6 +24,11 @@ export default async function AdminLoginPage({ searchParams }) {
       <div className="background-orb background-orb-right" />
 
       <section className="admin-auth-card">
+        <div className="admin-auth-actions">
+          <Link href="/" className="secondary-button">
+            Back to Home
+          </Link>
+        </div>
         <img
           src="https://res.cloudinary.com/dg4jf2sag/image/upload/v1772438965/logo_iris_gftpz1.png"
           alt="IRIS"
