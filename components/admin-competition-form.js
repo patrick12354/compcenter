@@ -6,14 +6,42 @@ import { useRouter } from "next/navigation";
 const INITIAL_STATE = {
   name: "",
   organizer: "",
-  registrationDeadline: "",
-  preliminaryDate: "",
+  registrationStart: "",
+  registrationEnd: "",
+  preliminaryStart: "",
+  preliminaryEnd: "",
   instagramLink: "",
   linktree: "",
   guidebookLink: "",
   registrationLink: "",
   posterLink: ""
 };
+
+const INDONESIAN_MONTH_FORMATTER = new Intl.DateTimeFormat("id-ID", {
+  day: "numeric",
+  month: "long",
+  year: "numeric"
+});
+
+function formatDateForSheet(value) {
+  if (!value) return "";
+
+  const parsedDate = new Date(`${value}T00:00:00`);
+  return INDONESIAN_MONTH_FORMATTER.format(parsedDate);
+}
+
+function buildRangeText(startDate, endDate) {
+  if (startDate && endDate) {
+    const start = formatDateForSheet(startDate);
+    const end = formatDateForSheet(endDate);
+    return start === end ? start : `${start} - ${end}`;
+  }
+
+  if (endDate) return formatDateForSheet(endDate);
+  if (startDate) return formatDateForSheet(startDate);
+
+  return "";
+}
 
 export default function AdminCompetitionForm() {
   const router = useRouter();
@@ -37,7 +65,19 @@ export default function AdminCompetitionForm() {
 
     try {
       const payload = new FormData();
-      Object.entries(formValues).forEach(([key, value]) => payload.set(key, value));
+      const registrationDeadline = buildRangeText(formValues.registrationStart, formValues.registrationEnd);
+      const preliminaryDate = buildRangeText(formValues.preliminaryStart, formValues.preliminaryEnd);
+
+      payload.set("name", formValues.name);
+      payload.set("organizer", formValues.organizer);
+      payload.set("registrationDeadline", registrationDeadline);
+      payload.set("preliminaryDate", preliminaryDate);
+      payload.set("instagramLink", formValues.instagramLink);
+      payload.set("linktree", formValues.linktree);
+      payload.set("guidebookLink", formValues.guidebookLink);
+      payload.set("registrationLink", formValues.registrationLink);
+      payload.set("posterLink", formValues.posterLink);
+
       if (posterFile) {
         payload.set("posterFile", posterFile);
       }
@@ -87,25 +127,45 @@ export default function AdminCompetitionForm() {
           <input id="organizer" name="organizer" value={formValues.organizer} onChange={handleChange} required />
         </div>
         <div className="field">
-          <label htmlFor="registrationDeadline">Tanggal Pendaftaran</label>
-          <input
-            id="registrationDeadline"
-            name="registrationDeadline"
-            value={formValues.registrationDeadline}
-            onChange={handleChange}
-            placeholder="Contoh: 9 - 28 Februari 2026"
-            required
-          />
+          <label htmlFor="registrationStart">Tanggal Pendaftaran</label>
+          <div className="admin-date-grid">
+            <input
+              id="registrationStart"
+              name="registrationStart"
+              type="date"
+              value={formValues.registrationStart}
+              onChange={handleChange}
+            />
+            <input
+              id="registrationEnd"
+              name="registrationEnd"
+              type="date"
+              value={formValues.registrationEnd}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <p className="field-hint">Isi tanggal mulai dan tanggal akhir pendaftaran melalui kalender.</p>
         </div>
         <div className="field">
-          <label htmlFor="preliminaryDate">Tanggal Penyisihan</label>
-          <input
-            id="preliminaryDate"
-            name="preliminaryDate"
-            value={formValues.preliminaryDate}
-            onChange={handleChange}
-            placeholder="Contoh: 1 Maret - 10 April 2026"
-          />
+          <label htmlFor="preliminaryStart">Tanggal Penyisihan</label>
+          <div className="admin-date-grid">
+            <input
+              id="preliminaryStart"
+              name="preliminaryStart"
+              type="date"
+              value={formValues.preliminaryStart}
+              onChange={handleChange}
+            />
+            <input
+              id="preliminaryEnd"
+              name="preliminaryEnd"
+              type="date"
+              value={formValues.preliminaryEnd}
+              onChange={handleChange}
+            />
+          </div>
+          <p className="field-hint">Opsional. Jika belum ada jadwal penyisihan, kolom ini boleh dibiarkan kosong.</p>
         </div>
         <div className="field">
           <label htmlFor="instagramLink">Link Instagram</label>

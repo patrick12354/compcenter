@@ -161,6 +161,12 @@ img {
   gap: 14px;
 }
 
+.admin-date-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
 .admin-actions {
   display: flex;
   justify-content: flex-start;
@@ -1243,7 +1249,8 @@ img {
   }
 
   .admin-grid,
-  .admin-upload-block {
+  .admin-upload-block,
+  .admin-date-grid {
     grid-template-columns: 1fr;
   }
 
