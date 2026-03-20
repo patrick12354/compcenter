@@ -21,6 +21,7 @@ Project ini dibangun dengan `Next.js` dan disiapkan untuk deploy ke Vercel.
 - Admin create form untuk append row ke spreadsheet
 - Upload poster ke Cloudinary atau input link poster manual
 - Admin delete row langsung dari spreadsheet
+- Chatbot kanan bawah untuk tanya deadline, lomba aktif, dan info dasar tentang IRIS Competition Center
 - API route untuk konsumsi data publik dan aksi admin
 
 ## Stack
@@ -29,6 +30,7 @@ Project ini dibangun dengan `Next.js` dan disiapkan untuk deploy ke Vercel.
 - `React 19`
 - `Google Sheets API`
 - `Cloudinary`
+- `Groq API`
 - `PapaParse`
 
 ## Struktur Penting
@@ -40,6 +42,7 @@ Project ini dibangun dengan `Next.js` dan disiapkan untuk deploy ke Vercel.
 - [`app/admin/lomba/new/page.js`](./app/admin/lomba/new/page.js): dashboard admin create + delete
 - [`lib/admin-auth.js`](./lib/admin-auth.js): auth admin berbasis cookie
 - [`lib/admin-services.js`](./lib/admin-services.js): Google Sheets append/delete dan Cloudinary upload
+- [`app/api/chat/route.js`](./app/api/chat/route.js): API chatbot Groq dengan scope terbatas
 
 ## Cara Kerja Data
 
@@ -81,6 +84,9 @@ CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 CLOUDINARY_FOLDER=
+
+GROQ_API_KEY=
+GROQ_MODEL=
 ```
 
 ## Setup Google Sheets
@@ -104,6 +110,20 @@ CLOUDINARY_FOLDER=
    - atau isi link poster manual
 
 Jika keduanya diisi, upload file diprioritaskan.
+
+## Setup Groq Chatbot
+
+1. Ambil API key dari Groq
+2. Isi `GROQ_API_KEY`
+3. Opsional: isi `GROQ_MODEL`
+
+Chatbot publik dibatasi untuk:
+
+- pertanyaan tentang IRIS Competition Center
+- pertanyaan tentang lomba yang tampil di website
+- deadline, organizer, guidebook, registrasi, dan info dasar event
+
+Jika pertanyaan di luar scope itu, chatbot akan menjawab `gatau`.
 
 ## Menjalankan Lokal
 
@@ -137,6 +157,7 @@ npm run start
 - `/admin/login` : login admin
 - `/admin/lomba/new` : dashboard admin
 - `/api/competitions` : data publik JSON
+- `/api/chat` : chatbot publik
 - `/api/admin/competitions` : create lomba
 - `/api/admin/competitions/delete` : delete row
 

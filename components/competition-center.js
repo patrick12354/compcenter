@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { buildCalendarLink, getShareCopy } from "@/lib/competition-helpers";
 import CompetitionCard from "@/components/competition-card";
+import CompetitionChatbot from "@/components/competition-chatbot";
 import CursorEffects from "@/components/cursor-effects";
 
 const FILTERS = [
@@ -432,6 +433,7 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
         </div>
       ) : null}
 
+      <CompetitionChatbot />
       {toastMessage ? <div className="toast">{toastMessage}</div> : null}
     </main>
   );
