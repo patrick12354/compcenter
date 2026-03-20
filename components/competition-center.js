@@ -11,7 +11,7 @@ const FILTERS = [
   { id: "open", label: "Masih buka" },
   { id: "soon", label: "Deadline dekat" },
   { id: "saved", label: "Tersimpan" },
-  { id: "guidebook", label: "Punya guidebook" }
+  { id: "guidebook", label: "Ada guidebook" }
 ];
 
 const SORTS = [
@@ -66,6 +66,18 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
     if (urgent.length) return urgent.slice(0, 3);
     return competitions.filter((item) => item.deadlineInfo.isActionable).slice(0, 3);
   }, [competitions]);
+
+  const spotlightDescription = useMemo(() => {
+    if (!spotlight.length) {
+      return "Belum ada lomba prioritas yang dapat ditampilkan saat ini.";
+    }
+
+    if (spotlight.length === 1) {
+      return "Lomba dengan tenggat terdekat yang layak diprioritaskan saat ini.";
+    }
+
+    return `${spotlight.length} lomba dengan tenggat terdekat yang layak diprioritaskan saat ini.`;
+  }, [spotlight]);
 
   const filteredCompetitions = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -137,11 +149,11 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
               />
               <div className="brand-text">
                 <strong>IRIS Competition Center</strong>
-                <span>Direktori kompetisi untuk menemukan event yang relevan lebih cepat.</span>
+                <span>Direktori kompetisi untuk menemukan peluang yang relevan lebih cepat.</span>
               </div>
             </div>
             <div className="nav-actions">
-              <div className="hero-badge">Data publik tersinkron dari sheet utama</div>
+              <div className="hero-badge">Data publik terhubung ke sheet utama</div>
               <a href="/admin/login" className="secondary-button nav-admin-link">
                 Admin
               </a>
@@ -154,9 +166,9 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
                 Temukan kompetisi terbaik untuk <span>langkah berikutnya.</span>
               </h1>
               <p className="hero-description">
-                IRIS Competition Center merangkum lomba yang sedang berjalan dalam satu tempat yang cepat dipindai,
-                mudah difilter, dan siap dipakai sebagai website publik. Sumber data tetap memakai spreadsheet yang sama,
-                dengan struktur aplikasi yang sudah dirapikan untuk deployment Vercel.
+                IRIS Competition Center merangkum informasi lomba dalam satu tempat yang ringkas, mudah ditelusuri,
+                dan cepat dipindai. Seluruh data publik tetap mengacu pada sheet utama agar informasi yang ditampilkan
+                konsisten dan mudah diperbarui.
               </p>
             </div>
 
@@ -164,12 +176,12 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
               <div className="insight-card">
                 <span className="panel-label">Prioritas minggu ini</span>
                 <strong>{insights.closingSoonCount}</strong>
-                <p>Lomba dengan deadline dekat yang perlu segera dicek.</p>
+                <p>Lomba dengan tenggat dekat yang perlu segera ditinjau.</p>
               </div>
               <div className="insight-card">
                 <span className="panel-label">Guidebook tersedia</span>
                 <strong>{insights.guidebookCount}</strong>
-                <p>Event yang sudah menyertakan guidebook atau dokumen pendukung.</p>
+                <p>Lomba yang sudah menyertakan guidebook atau dokumen pendukung.</p>
               </div>
             </div>
           </div>
@@ -178,22 +190,22 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
             <article className="summary-card">
               <span className="panel-label">Masih buka</span>
               <strong>{insights.openCount}</strong>
-              <p>Event dengan pendaftaran aktif.</p>
+              <p>Lomba dengan pendaftaran yang masih berlangsung.</p>
             </article>
             <article className="summary-card">
               <span className="panel-label">Deadline dekat</span>
               <strong>{insights.closingSoonCount}</strong>
-              <p>Perlu follow up cepat minggu ini.</p>
+              <p>Perlu segera diprioritaskan dalam waktu dekat.</p>
             </article>
             <article className="summary-card">
-              <span className="panel-label">Total event</span>
+              <span className="panel-label">Total lomba</span>
               <strong>{insights.totalCount}</strong>
-              <p>Jumlah lomba publik yang tampil di website.</p>
+              <p>Jumlah lomba publik yang saat ini ditampilkan.</p>
             </article>
             <article className="summary-card">
               <span className="panel-label">Guidebook</span>
               <strong>{insights.guidebookCount}</strong>
-              <p>Sudah memiliki lampiran panduan atau brief.</p>
+              <p>Sudah dilengkapi panduan atau dokumen pendukung.</p>
             </article>
           </div>
         </section>
@@ -202,9 +214,9 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
           <div className="section-header">
             <div>
               <h2>Spotlight deadline</h2>
-              <p>Tiga lomba teratas yang paling actionable sekarang, cocok untuk langsung dicek.</p>
+              <p>{spotlightDescription}</p>
             </div>
-            <p className="panel-note">Diurutkan dari deadline paling dekat dan status paling relevan.</p>
+            <p className="panel-note">Diurutkan berdasarkan tenggat terdekat dan tingkat urgensi.</p>
           </div>
 
           <div className="spotlight-grid">
@@ -223,7 +235,7 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
                 <p className="hero-description spotlight-copy">{competition.organizer}</p>
                 <div className="spotlight-meta">
                   <span>{competition.deadlineText || "TBA"}</span>
-                  <span>{competition.prelimText || "Prelim belum diisi"}</span>
+                  <span>{competition.prelimText || "Jadwal penyisihan belum diisi"}</span>
                 </div>
               </article>
             ))}
@@ -234,22 +246,22 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
           <div className="control-panel">
             <div className="section-header">
               <div>
-                <h2>Control deck</h2>
-                <p>Cari cepat, filter penyelenggara, sortir prioritas, lalu simpan shortlist di browser.</p>
+                <h2>Panel pencarian</h2>
+                <p>Cari lomba, filter penyelenggara, urutkan prioritas, lalu simpan daftar pilihan di browser.</p>
               </div>
-              <p className="control-note">Saved state disimpan lokal tanpa mengubah spreadsheet.</p>
+              <p className="control-note">Daftar tersimpan hanya berlaku di browser ini dan tidak mengubah spreadsheet.</p>
             </div>
 
             {fetchError ? (
               <div className="empty-state">
-                <h3>Spreadsheet source sedang tidak bisa diambil.</h3>
-                <p>Data belum berhasil dimuat pada request ini. Coba refresh lagi beberapa saat.</p>
+                <h3>Sumber data spreadsheet sedang tidak dapat diakses.</h3>
+                <p>Data belum berhasil dimuat pada permintaan ini. Silakan coba refresh beberapa saat lagi.</p>
               </div>
             ) : null}
 
             <div className="control-grid">
               <div className="field">
-                <label htmlFor="query">Cari event</label>
+                <label htmlFor="query">Cari lomba</label>
                 <input
                   id="query"
                   type="text"
@@ -261,7 +273,7 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
               <div className="field">
                 <label htmlFor="organizer">Penyelenggara</label>
                 <select id="organizer" value={organizer} onChange={(event) => setOrganizer(event.target.value)}>
-                  <option value="all">Semua organizer</option>
+                  <option value="all">Semua penyelenggara</option>
                   {organizers.map((item) => (
                     <option key={item} value={item}>
                       {item}
@@ -280,7 +292,7 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
                 </select>
               </div>
               <div className="field">
-                <label>Saved lokal</label>
+                <label>Tersimpan</label>
                 <div className="hero-badge">{savedSlugs.length} lomba tersimpan</div>
               </div>
             </div>
@@ -304,15 +316,15 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
           <div className="catalog-panel">
             <div className="catalog-header">
               <div>
-                <h2 className="catalog-title">Competition catalog</h2>
+                <h2 className="catalog-title">Katalog kompetisi</h2>
                 <p className="catalog-subtitle">
-                  Klik card untuk membuka detail lomba dalam modal dan akses link penting seperti registrasi, guidebook,
+                  Klik kartu untuk melihat detail lomba dan membuka tautan penting seperti registrasi, guidebook,
                   kalender, dan kanal resmi penyelenggara.
                 </p>
               </div>
               <div className="mini-stats">
                 <span>{filteredCompetitions.length} hasil</span>
-                <span>{competitions.length} total event</span>
+                <span>{competitions.length} total lomba</span>
               </div>
             </div>
 
@@ -331,7 +343,7 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
             ) : (
               <div className="empty-state">
                 <h3>Tidak ada hasil untuk kombinasi filter ini.</h3>
-                <p>Coba ganti organizer, reset quick filter, atau gunakan kata kunci yang lebih umum.</p>
+                <p>Coba ganti penyelenggara, ubah filter, atau gunakan kata kunci yang lebih umum.</p>
               </div>
             )}
           </div>
@@ -379,7 +391,7 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
                     rel="noreferrer"
                     className="primary-button modal-primary"
                   >
-                    Daftar sekarang
+                    Buka registrasi
                   </a>
                 ) : null}
                 {selectedCompetition.guidebookLink ? (
