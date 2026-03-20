@@ -133,6 +133,7 @@ export default function AdminCompetitionForm() {
               id="registrationStart"
               name="registrationStart"
               type="date"
+              lang="en-GB"
               value={formValues.registrationStart}
               onChange={handleChange}
             />
@@ -140,6 +141,7 @@ export default function AdminCompetitionForm() {
               id="registrationEnd"
               name="registrationEnd"
               type="date"
+              lang="en-GB"
               value={formValues.registrationEnd}
               onChange={handleChange}
               required
@@ -154,6 +156,7 @@ export default function AdminCompetitionForm() {
               id="preliminaryStart"
               name="preliminaryStart"
               type="date"
+              lang="en-GB"
               value={formValues.preliminaryStart}
               onChange={handleChange}
             />
@@ -161,6 +164,7 @@ export default function AdminCompetitionForm() {
               id="preliminaryEnd"
               name="preliminaryEnd"
               type="date"
+              lang="en-GB"
               value={formValues.preliminaryEnd}
               onChange={handleChange}
             />
