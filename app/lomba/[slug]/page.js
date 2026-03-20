@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  buildCalendarLink,
-  formatDeadlineStatus,
   getCompetitionBySlug,
   getCompetitionInsights,
-  getCompetitions,
-  getShareCopy
+  getCompetitions
 } from "@/lib/competition-data";
+import { buildCalendarLink, formatDeadlineStatus, getShareCopy } from "@/lib/competition-helpers";
 
 export const revalidate = 900;
 

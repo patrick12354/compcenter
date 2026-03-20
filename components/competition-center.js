@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { buildCalendarLink, getShareCopy } from "@/lib/competition-data";
+import { buildCalendarLink, getShareCopy } from "@/lib/competition-helpers";
 import CompetitionCard from "@/components/competition-card";
 import CursorEffects from "@/components/cursor-effects";
 
