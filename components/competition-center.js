@@ -5,6 +5,7 @@ import { buildCalendarLink, getShareCopy } from "@/lib/competition-helpers";
 import CompetitionCard from "@/components/competition-card";
 import CompetitionChatbot from "@/components/competition-chatbot";
 import CursorEffects from "@/components/cursor-effects";
+import SiteViewsCounter from "@/components/site-views-counter";
 
 const FILTERS = [
   { id: "all", label: "Semua" },
@@ -379,6 +380,10 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
               </span>
             </div>
           </a>
+        </section>
+
+        <section className="section-block section-footer">
+          <SiteViewsCounter />
         </section>
       </div>
 

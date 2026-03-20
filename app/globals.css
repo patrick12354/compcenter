@@ -610,6 +610,47 @@ img {
   margin-top: 22px;
 }
 
+.section-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.site-views-panel {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  width: min(100%, 360px);
+  padding: 14px 18px;
+  border: 1px solid rgba(147, 197, 253, 0.1);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(18px);
+}
+
+.site-views-label {
+  color: rgba(121, 189, 255, 0.86);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.site-views-count {
+  color: rgba(247, 251, 255, 0.96);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.site-views-note {
+  margin: 0;
+  color: rgba(138, 166, 199, 0.84);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
 .about-iris-panel {
   position: relative;
   display: grid;

@@ -22,6 +22,7 @@ Project ini dibangun dengan `Next.js` dan disiapkan untuk deploy ke Vercel.
 - Upload poster ke Cloudinary atau input link poster manual
 - Admin delete row langsung dari spreadsheet
 - Chatbot kanan bawah untuk tanya deadline, lomba aktif, dan info dasar tentang IRIS Competition Center
+- Counter kunjungan kecil di bagian bawah website dengan penyimpanan persisten
 - API route untuk konsumsi data publik dan aksi admin
 
 ## Stack
@@ -31,6 +32,7 @@ Project ini dibangun dengan `Next.js` dan disiapkan untuk deploy ke Vercel.
 - `Google Sheets API`
 - `Cloudinary`
 - `Groq API`
+- `Upstash Redis REST`
 - `PapaParse`
 
 ## Struktur Penting
@@ -43,6 +45,7 @@ Project ini dibangun dengan `Next.js` dan disiapkan untuk deploy ke Vercel.
 - [`lib/admin-auth.js`](./lib/admin-auth.js): auth admin berbasis cookie
 - [`lib/admin-services.js`](./lib/admin-services.js): Google Sheets append/delete dan Cloudinary upload
 - [`app/api/chat/route.js`](./app/api/chat/route.js): API chatbot Groq dengan scope terbatas
+- [`app/api/visits/route.js`](./app/api/visits/route.js): API counter kunjungan persisten
 
 ## Cara Kerja Data
 
@@ -87,6 +90,10 @@ CLOUDINARY_FOLDER=
 
 GROQ_API_KEY=
 GROQ_MODEL=
+
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+UPSTASH_REDIS_KEY=
 ```
 
 ## Setup Google Sheets
@@ -125,6 +132,25 @@ Chatbot publik dibatasi untuk:
 
 Jika pertanyaan di luar scope itu, chatbot akan menjawab `gatau`.
 
+## Setup Counter Kunjungan
+
+Jangan gunakan file lokal atau variabel in-memory untuk counter jika website di-deploy ke Vercel, karena nilainya bisa hilang saat instance restart atau deploy ulang.
+
+Gunakan Redis REST agar counter tetap persisten:
+
+1. Buat database Upstash Redis
+2. Ambil `REST URL` dan `REST TOKEN`
+3. Isi:
+   - `UPSTASH_REDIS_REST_URL`
+   - `UPSTASH_REDIS_REST_TOKEN`
+   - `UPSTASH_REDIS_KEY` (opsional, default `iris:site:views`)
+
+Counter saat ini:
+
+- tampil kecil di bagian bawah homepage
+- hanya menambah angka jika browser belum dihitung dalam 12 jam terakhir
+- tetap tersimpan saat deploy baru
+
 ## Menjalankan Lokal
 
 Install dependency:
@@ -158,6 +184,7 @@ npm run start
 - `/admin/lomba/new` : dashboard admin
 - `/api/competitions` : data publik JSON
 - `/api/chat` : chatbot publik
+- `/api/visits` : counter kunjungan
 - `/api/admin/competitions` : create lomba
 - `/api/admin/competitions/delete` : delete row
 
