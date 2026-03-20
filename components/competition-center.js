@@ -347,6 +347,39 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
             )}
           </div>
         </section>
+
+        <section className="section-block">
+          <a
+            href="https://www.instagram.com/irisearch/"
+            target="_blank"
+            rel="noreferrer"
+            className="about-iris-panel"
+          >
+            <div className="about-iris-copy">
+              <span className="panel-label">Find Out More About Us</span>
+              <h2>Terkoneksi lebih dekat dengan IRIS.</h2>
+              <p>
+                Lihat aktivitas, proyek, dan update terbaru IRIS melalui kanal resmi Instagram kami.
+              </p>
+            </div>
+
+            <div className="about-iris-action">
+              <span className="about-iris-glass">
+                <span className="about-iris-glow" />
+                <span className="about-iris-card-top">
+                  <span className="about-iris-chip">Instagram</span>
+                  <img
+                    src="https://res.cloudinary.com/dg4jf2sag/image/upload/v1772438965/logo_iris_gftpz1.png"
+                    alt="IRIS"
+                    className="about-iris-logo"
+                  />
+                </span>
+                <strong>@irisearch</strong>
+                <span className="about-iris-link">Kunjungi profil</span>
+              </span>
+            </div>
+          </a>
+        </section>
       </div>
 
       {selectedCompetition ? (

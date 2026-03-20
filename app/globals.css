@@ -610,6 +610,135 @@ img {
   margin-top: 22px;
 }
 
+.about-iris-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 22px;
+  align-items: center;
+  overflow: hidden;
+  padding: 26px 28px;
+  border: 1px solid rgba(147, 197, 253, 0.16);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(70, 224, 255, 0.16), transparent 26%),
+    radial-gradient(circle at 88% 85%, rgba(29, 143, 255, 0.14), transparent 26%),
+    linear-gradient(145deg, rgba(10, 30, 56, 0.9), rgba(4, 17, 31, 0.94));
+  box-shadow: var(--shadow);
+}
+
+.about-iris-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 16%, rgba(255, 255, 255, 0.05), transparent 46%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 40%);
+  pointer-events: none;
+}
+
+.about-iris-copy,
+.about-iris-action {
+  position: relative;
+  z-index: 1;
+}
+
+.about-iris-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.about-iris-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(70, 224, 255, 0.22));
+}
+
+.about-iris-copy h2 {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  letter-spacing: -0.05em;
+  line-height: 0.96;
+}
+
+.about-iris-copy p {
+  max-width: 56ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.about-iris-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.about-iris-glass {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  width: min(100%, 340px);
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
+    rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(22px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 28px 70px rgba(0, 0, 0, 0.22);
+}
+
+.about-iris-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.about-iris-glow {
+  position: absolute;
+  inset: auto -30px -36px auto;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(70, 224, 255, 0.28), transparent 66%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.about-iris-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--blue-100);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.about-iris-glass strong {
+  position: relative;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  letter-spacing: -0.04em;
+}
+
+.about-iris-link {
+  position: relative;
+  color: rgba(216, 236, 255, 0.78);
+  font-size: 0.95rem;
+}
+
 .section-header {
   align-items: end;
   margin-bottom: 14px;
@@ -1244,7 +1373,8 @@ img {
 
   .hero-copy,
   .detail-layout,
-  .control-grid {
+  .control-grid,
+  .about-iris-panel {
     grid-template-columns: 1fr;
   }
 
@@ -1345,7 +1475,8 @@ img {
   .spotlight-grid,
   .catalog-grid,
   .control-grid,
-  .detail-grid {
+  .detail-grid,
+  .about-iris-panel {
     grid-template-columns: 1fr;
   }
 
@@ -1458,6 +1589,30 @@ img {
 
   .modal-right {
     padding: 26px 16px 16px;
+  }
+
+  .about-iris-panel {
+    padding: 18px;
+    border-radius: 26px;
+  }
+
+  .about-iris-copy h2 {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
+  }
+
+  .about-iris-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .about-iris-action {
+    justify-content: stretch;
+  }
+
+  .about-iris-glass {
+    width: 100%;
+    padding: 18px;
+    border-radius: 22px;
   }
 
   .modal-action-grid {
