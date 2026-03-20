@@ -153,7 +153,6 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
               </div>
             </div>
             <div className="nav-actions">
-              <div className="hero-badge">Data publik terhubung ke sheet utama</div>
               <a href="/admin/login" className="secondary-button nav-admin-link">
                 Admin
               </a>
