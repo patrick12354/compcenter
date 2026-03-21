@@ -510,10 +510,8 @@ img {
 .hero-copy,
 .detail-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
   gap: 28px;
-  align-items: end;
-  margin-top: 34px;
+  margin-top: 28px;
 }
 
 .hero-title,
@@ -526,9 +524,9 @@ img {
 }
 
 .hero-title {
-  max-width: 11ch;
-  font-size: clamp(3.4rem, 8vw, 6.9rem);
-  line-height: 0.92;
+  max-width: 16ch;
+  font-size: clamp(3.2rem, 7vw, 6.1rem);
+  line-height: 0.94;
   text-wrap: balance;
 }
 
@@ -537,8 +535,8 @@ img {
 }
 
 .hero-description {
-  max-width: 58ch;
-  margin: 20px 0 0;
+  max-width: 64ch;
+  margin: 18px 0 0;
   font-size: 1.04rem;
   line-height: 1.7;
 }
@@ -598,7 +596,7 @@ img {
 
 .summary-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 18px;
+  margin-top: 10px;
 }
 
 .summary-card strong {
