@@ -171,41 +171,23 @@ export default function CompetitionCenter({ competitions, insights, fetchError =
                 konsisten dan mudah diperbarui.
               </p>
             </div>
-
-            <div className="hero-side">
-              <div className="insight-card">
-                <span className="panel-label">Prioritas minggu ini</span>
-                <strong>{insights.closingSoonCount}</strong>
-                <p>Lomba dengan tenggat dekat yang perlu segera ditinjau.</p>
-              </div>
-              <div className="insight-card">
-                <span className="panel-label">Guidebook tersedia</span>
-                <strong>{insights.guidebookCount}</strong>
-                <p>Lomba yang sudah menyertakan guidebook atau dokumen pendukung.</p>
-              </div>
-            </div>
           </div>
 
           <div className="summary-grid">
+            <article className="summary-card">
+              <span className="panel-label">Prioritas minggu ini</span>
+              <strong>{insights.closingSoonCount}</strong>
+              <p>Lomba dengan tenggat dekat yang perlu segera ditinjau.</p>
+            </article>
             <article className="summary-card">
               <span className="panel-label">Masih buka</span>
               <strong>{insights.openCount}</strong>
               <p>Lomba dengan pendaftaran yang masih berlangsung.</p>
             </article>
             <article className="summary-card">
-              <span className="panel-label">Deadline dekat</span>
-              <strong>{insights.closingSoonCount}</strong>
-              <p>Perlu segera diprioritaskan dalam waktu dekat.</p>
-            </article>
-            <article className="summary-card">
               <span className="panel-label">Total lomba</span>
               <strong>{insights.totalCount}</strong>
               <p>Jumlah lomba publik yang saat ini ditampilkan.</p>
-            </article>
-            <article className="summary-card">
-              <span className="panel-label">Guidebook</span>
-              <strong>{insights.guidebookCount}</strong>
-              <p>Sudah dilengkapi panduan atau dokumen pendukung.</p>
             </article>
           </div>
         </section>
